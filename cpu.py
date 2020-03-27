@@ -230,7 +230,7 @@ class CPU:
         self.pc = self.reg[operand_a]
 
     def handle_jeq(self, operand_a, operand_b):
-        #if the flag is the equal flag
+        #if the flag is the equal flag/set to true
         if self.fl & equal_flag:
             #set pc to the register for operand_a
             self.pc = self.reg[operand_a]
