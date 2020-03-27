@@ -16,6 +16,10 @@ CMP = 0b10100111 #added instructions for cmp, jmp, jeq n jnu
 JMP = 0b01010100
 JEQ = 0b01010101
 JNE = 0b01010110
+AND = 0b10101000
+OR = 0b10101010
+XOR = 0b10101011
+NOT = 0b01101001
 
 
 SP = 7 #stack pointer
