@@ -53,7 +53,10 @@ class CPU:
         JMP: self.handle_jmp,
         JEQ: self.handle_jeq,
         JNE: self.handle_jne,
-        XOR: self.handle_xor
+        XOR: self.handle_xor,
+        AND: self.handle_and,
+        NOT: self.handle_not,
+        OR: self.handle_or
         }
         
         self.halted = False
@@ -135,8 +138,15 @@ class CPU:
         elif op == "XOR":
             result = self.reg[reg_a] ^ self.reg[reg_b]
             self.reg[reg_a] = result
-
-    
+        elif op == "AND":
+            result = self.reg[reg_a] & self.reg[reg_b]
+            self.reg[reg_a] = result
+        elif op == "OR":
+            result = self.reg[reg_a] | self.reg[reg_b]
+            self.reg[reg_a] = result 
+        elif op == "NOT":
+            result = ~self.reg[reg_a]
+            self.reg[reg_a] = result      
         elif op == "CMP":
             # Compare the values in reg a, b
             # if value at reg_a < value at reg_b
@@ -261,6 +271,21 @@ class CPU:
          # Invoke the ALU to perform XOR operation passing operands a and b
         self.alu('XOR', operand_a, operand_b)
         self.sub_routine = False        
+
+    def handle_and(self, operand_a, operand_b):
+        # Invoke the ALU to perform AND operation passing operands a and b
+        self.alu('AND', operand_a, operand_b)
+        self.sub_routine = False
+
+    def handle_or(self, operand_a, operand_b):
+        # Invoke the ALU to perform OR operation passing operands a and b
+        self.alu('OR', operand_a, operand_b)
+        self.sub_routine = False    
+
+    def handle_not(self, operand_a, operand_b):
+        # Invoke the ALU to perform NOT operation passing operands a and b
+        self.alu('NOT', operand_a, operand_b)
+        self.sub_routine = False      
      
 
     def run(self):
