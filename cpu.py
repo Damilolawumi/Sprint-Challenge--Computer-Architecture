@@ -53,6 +53,7 @@ class CPU:
         JMP: self.handle_jmp,
         JEQ: self.handle_jeq,
         JNE: self.handle_jne,
+        XOR: self.handle_xor
         }
         
         self.halted = False
@@ -131,6 +132,11 @@ class CPU:
         elif op == "MUL":
              # Multiply the value in reg a, b and store the result in reg_a
             self.reg[reg_a] *= self.reg[reg_b] 
+        elif op == "XOR":
+            result = self.reg[reg_a] ^ self.reg[reg_b]
+            self.reg[reg_a] = result
+
+    
         elif op == "CMP":
             # Compare the values in reg a, b
             # if value at reg_a < value at reg_b
@@ -250,6 +256,11 @@ class CPU:
             #otherwise increment self.pc
         else:
             self.pc += 2
+
+    def handle_xor(self, operand_a, operand_b):
+         # Invoke the ALU to perform XOR operation passing operands a and b
+        self.alu('XOR', operand_a, operand_b)
+        self.sub_routine = False        
      
 
     def run(self):
